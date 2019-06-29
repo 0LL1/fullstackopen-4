@@ -1,7 +1,14 @@
-const dummy = blogs => {
-  return 1
-}
+const dummy = blogs => 1
 
 const totalLikes = blogs => blogs.reduce((acc, blog) => acc + blog.likes, 0)
 
-module.exports = { dummy, totalLikes }
+const favoriteBlog = blogs => {
+  // not the cleanest solution but solution nonetheless
+  const likes = blogs.map(blog => parseInt(blog.likes))
+
+  const mostLikes = Math.max(...likes)
+
+  return blogs.find(blog => blog.likes === mostLikes)
+}
+
+module.exports = { dummy, totalLikes, favoriteBlog }
