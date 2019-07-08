@@ -31,7 +31,33 @@ const mostBlogs = blogs => {
     }
   }
 
-  return blogCounts.reduce((max, cur) => (max > cur.blogs ? max : cur), 0)
+  return blogCounts.reduce(
+    (max, cur) => (max.blogs > cur.blogs ? max : cur),
+    blogCounts[0]
+  )
 }
 
-module.exports = { dummy, totalLikes, favoriteBlog, mostBlogs }
+const mostLikes = blogs => {
+  let totalLikes = []
+
+  for (blog of blogs) {
+    const blogsByAuthor = { author: blog.author, likes: 0 }
+
+    if (!totalLikes.find(elem => elem.author === blogsByAuthor.author)) {
+      totalLikes.push(blogsByAuthor)
+    }
+
+    for (blog of blogs) {
+      if (blog.author === blogsByAuthor.author) {
+        blogsByAuthor.likes += blog.likes
+      }
+    }
+  }
+
+  return totalLikes.reduce(
+    (max, cur) => (max.likes > cur.likes ? max : cur),
+    totalLikes[0]
+  )
+}
+
+module.exports = { dummy, totalLikes, favoriteBlog, mostBlogs, mostLikes }
