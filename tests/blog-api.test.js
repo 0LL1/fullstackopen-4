@@ -65,6 +65,12 @@ test('there are six blogs', async () => {
   expect(response.body.length).toBe(6)
 })
 
+test('there is an id field', async () => {
+  const response = await api.get('/api/blogs')
+
+  expect(response.body[0].id).toBeDefined()
+})
+
 beforeEach(async () => {
   await Blog.deleteMany({})
 
