@@ -15,7 +15,7 @@ const mostBlogs = blogs => {
   // not super happy with this one but it gets the job done
   let blogCounts = []
 
-  for (blog of blogs) {
+  for (const blog of blogs) {
     const blogsByAuthor = { author: blog.author, blogs: 0 }
 
     if (
@@ -24,7 +24,7 @@ const mostBlogs = blogs => {
       blogCounts.push(blogsByAuthor)
     }
 
-    for (blog of blogs) {
+    for (const blog of blogs) {
       if (blog.author === blogsByAuthor.author) {
         blogsByAuthor.blogs++
       }
@@ -40,14 +40,14 @@ const mostBlogs = blogs => {
 const mostLikes = blogs => {
   let totalLikes = []
 
-  for (blog of blogs) {
+  for (const blog of blogs) {
     const blogsByAuthor = { author: blog.author, likes: 0 }
 
     if (!totalLikes.find(elem => elem.author === blogsByAuthor.author)) {
       totalLikes.push(blogsByAuthor)
     }
 
-    for (blog of blogs) {
+    for (const blog of blogs) {
       if (blog.author === blogsByAuthor.author) {
         blogsByAuthor.likes += blog.likes
       }
