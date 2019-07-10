@@ -94,7 +94,7 @@ test('a valid blog can be added', async () => {
   expect(titles).toContain('Test title')
 })
 
-test('likes value defaults to 0', async () => {
+test('likes default to 0', async () => {
   const newBlog = {
     title: 'Test title',
     author: 'Olli',
@@ -106,6 +106,18 @@ test('likes value defaults to 0', async () => {
   const response = await api.get('/api/blogs')
 
   expect(response.body[response.body.length - 1].likes).toBe(0)
+})
+
+test('title and url are required', async () => {
+  const newBlog = {
+    author: 'Olli',
+    likes: 100
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
 })
 
 beforeEach(async () => {
