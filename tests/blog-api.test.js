@@ -94,6 +94,20 @@ test('a valid blog can be added', async () => {
   expect(titles).toContain('Test title')
 })
 
+test('likes value defaults to 0', async () => {
+  const newBlog = {
+    title: 'Test title',
+    author: 'Olli',
+    url: 'www.test.com'
+  }
+
+  await api.post('/api/blogs').send(newBlog)
+
+  const response = await api.get('/api/blogs')
+
+  expect(response.body[response.body.length - 1].likes).toBe(0)
+})
+
 beforeEach(async () => {
   await Blog.deleteMany({})
 
