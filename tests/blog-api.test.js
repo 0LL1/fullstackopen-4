@@ -120,6 +120,21 @@ test('title and url are required', async () => {
     .expect(400)
 })
 
+test('a blog can be deleted', async () => {
+  const blogsAtStart = await api.get('/api/blogs')
+  const blogToDelete = blogsAtStart.body[0]
+
+  await api.delete(`/api/blogs/${blogToDelete.id}`).expect(204)
+
+  const blogsAtEnd = await api.get('/api/blogs')
+
+  expect(blogsAtEnd.body.length).toBe(initialBlogs.length - 1)
+
+  const titles = blogsAtEnd.body.map(r => r.title)
+
+  expect(titles).not.toContain(blogToDelete.title)
+})
+
 beforeEach(async () => {
   await Blog.deleteMany({})
 
