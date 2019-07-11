@@ -135,6 +135,22 @@ test('a blog can be deleted', async () => {
   expect(titles).not.toContain(blogToDelete.title)
 })
 
+test('a blog can be updated', async () => {
+  const blogsAtStart = await api.get('/api/blogs')
+  const blogToUpdate = blogsAtStart.body[0]
+
+  const modifiedBlog = { ...blogToUpdate, likes: 123 }
+
+  await api
+    .put(`/api/blogs/${blogToUpdate.id}`)
+    .send(modifiedBlog)
+    .expect(200)
+
+  const blogsAtEnd = await api.get('/api/blogs')
+
+  expect(blogsAtEnd.body[0].likes).toBe(123)
+})
+
 beforeEach(async () => {
   await Blog.deleteMany({})
 
