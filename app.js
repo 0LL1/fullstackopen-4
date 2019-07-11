@@ -12,7 +12,8 @@ console.log('connecting to', config.MONGODB_URI)
 mongoose
   .connect(config.MONGODB_URI, {
     useNewUrlParser: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useCreateIndex: true
   })
   .then(() => {
     console.log('connected to MongoDB')

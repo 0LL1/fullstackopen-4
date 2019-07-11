@@ -12,6 +12,14 @@ usersRouter.post('/', async (request, response, next) => {
   try {
     const body = request.body
 
+    if (body.password === undefined) {
+      return response.status(400).json({ error: 'password is missing' })
+    } else if (body.password.length < 3) {
+      return response
+        .status(400)
+        .json({ error: 'password must be at least 3 characters long' })
+    }
+
     const saltRounds = 10
     const passwordHash = await bcrypt.hash(body.password, saltRounds)
 
@@ -25,6 +33,9 @@ usersRouter.post('/', async (request, response, next) => {
 
     response.json(savedUser)
   } catch (error) {
+    if (error.name === 'ValidationError' || error.name === 'MongoError') {
+      return response.status(400).json({ error: error.message })
+    }
     next(error)
   }
 })
