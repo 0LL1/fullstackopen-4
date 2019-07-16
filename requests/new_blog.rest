@@ -5,5 +5,6 @@ Content-Type: application/json
   "title": "Test1",
   "author": "Olli Rautiainen",
   "url": "www.test1.com",
-  "likes": 100
+  "likes": 100,
+  "userId": "5d278ce0daecf817b36e9fa4"
 }

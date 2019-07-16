@@ -113,7 +113,7 @@ test('username must be unique', async () => {
     .expect(400)
     .expect('Content-Type', /application\/json/)
 
-  expect(result.body.error).toContain('duplicate')
+  expect(result.body.error).toContain('`username` to be unique')
 
   const usersAtEnd = await api.get('/api/users')
 
