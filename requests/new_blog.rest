@@ -1,10 +1,10 @@
 POST http://localhost:3003/api/blogs/
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3Q0IiwiaWQiOiI1ZDI3OGY5NGExOWQ0MzE4OGU4M2JmOWEiLCJpYXQiOjE1NjMzNzk3MDN9.c3j8vbSo5ld_KO5iz5pSALfAKkAFLPA-5h-SOeBRkzI
 
 {
   "title": "Test1",
   "author": "Olli Rautiainen",
   "url": "www.test1.com",
-  "likes": 100,
-  "userId": "5d278ce0daecf817b36e9fa4"
+  "likes": 100
 }
